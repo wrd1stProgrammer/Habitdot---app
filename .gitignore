@@ -1,0 +1,28 @@
+.DS_Store
+*.swp
+*.tmp
+
+# Xcode user state
+xcuserdata/
+*.xcuserstate
+*.xccheckout
+*.moved-aside
+
+# Build outputs
+DerivedData/
+build/
+*.ipa
+*.dSYM/
+*.xcarchive/
+
+# Swift Package Manager local state
+.build/
+.swiftpm/
+
+# Local generated/reference media not required to build the app
+/app-icon/
+/concept/
+/main/
+/onboarding/
+/screenshots/
+/widgets/

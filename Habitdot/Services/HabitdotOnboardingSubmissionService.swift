@@ -1,0 +1,71 @@
+import Foundation
+
+struct HabitdotOnboardingSubmissionRequest: Codable, Hashable {
+    let locale: String
+    let countryCode: String?
+    let timeZone: String
+    let appVersion: String
+    let buildNumber: String
+    let platform: String
+    let completedAt: Date
+    let source: String?
+    let selectedFirstHabit: String?
+    let selectedTheme: String?
+    let commonReminderHour: Int?
+    let commonReminderMinute: Int?
+    let survey: [String: String]
+
+    enum CodingKeys: String, CodingKey {
+        case locale
+        case countryCode = "country_code"
+        case timeZone = "time_zone"
+        case appVersion = "app_version"
+        case buildNumber = "build_number"
+        case platform
+        case completedAt = "completed_at"
+        case source
+        case selectedFirstHabit = "selected_first_habit"
+        case selectedTheme = "selected_theme"
+        case commonReminderHour = "common_reminder_hour"
+        case commonReminderMinute = "common_reminder_minute"
+        case survey
+    }
+}
+
+@MainActor
+struct HabitdotOnboardingSubmissionService {
+    private let endpoint: URL
+    private let session: URLSession
+    private let userDefaults: UserDefaults
+
+    init(
+        baseURL: URL = URL(string: "https://facemaxx.nostalgia-drive.com/v1/habitdot")!,
+        session: URLSession = .shared,
+        userDefaults: UserDefaults = .standard
+    ) {
+        self.endpoint = baseURL.appendingPathComponent("onboarding")
+        self.session = session
+        self.userDefaults = userDefaults
+    }
+
+    func submit(_ requestBody: HabitdotOnboardingSubmissionRequest) async throws {
+        var urlRequest = URLRequest(url: endpoint)
+        urlRequest.httpMethod = "POST"
+        urlRequest.timeoutInterval = 8
+        urlRequest.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        urlRequest.setValue("application/json", forHTTPHeaderField: "Accept")
+        urlRequest.setValue(HabitdotInstallIdentity.value(userDefaults: userDefaults), forHTTPHeaderField: "X-Facemaxx-Install-Id")
+        urlRequest.httpBody = try Self.encoder.encode(requestBody)
+
+        let (_, response) = try await session.data(for: urlRequest)
+        guard let httpResponse = response as? HTTPURLResponse, 200..<300 ~= httpResponse.statusCode else {
+            throw URLError(.badServerResponse)
+        }
+    }
+
+    private static let encoder: JSONEncoder = {
+        let encoder = JSONEncoder()
+        encoder.dateEncodingStrategy = .iso8601
+        return encoder
+    }()
+}
