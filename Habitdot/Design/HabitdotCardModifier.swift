@@ -1,11 +1,21 @@
 import SwiftUI
 
 struct HabitdotCardModifier: ViewModifier {
+    @Environment(\.colorScheme) private var colorScheme
+
     private let shape = RoundedRectangle(cornerRadius: 19, style: .continuous)
 
     @ViewBuilder
     func body(content: Content) -> some View {
-        if #available(iOS 26.0, *) {
+        if colorScheme == .dark {
+            content
+                .background(Color.habitdotCard, in: shape)
+                .overlay {
+                    shape
+                        .stroke(Color.habitdotSubtleStroke, lineWidth: 0.9)
+                }
+                .shadow(color: .black.opacity(0.26), radius: 18, y: 10)
+        } else if #available(iOS 26.0, *) {
             content
                 .background {
                     shape

@@ -5,3 +5,7 @@ struct OnboardingOption: Identifiable, Hashable {
     let symbolName: String
     let titleKey: String
 }
+
+enum OnboardingHabitSelection {
+    static let customID = "custom"
+}

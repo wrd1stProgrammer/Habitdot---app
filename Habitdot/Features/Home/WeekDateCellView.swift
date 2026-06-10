@@ -22,7 +22,11 @@ struct WeekDateCellView: View {
         .background {
             if isSelected {
                 Capsule()
-                    .fill(Color.habitdotCard)
+                    .fill(Color.habitdotElevatedSurface)
+                    .overlay {
+                        Capsule()
+                            .stroke(Color.habitdotSubtleStroke, lineWidth: 1)
+                    }
             }
         }
         .accessibilityElement(children: .ignore)

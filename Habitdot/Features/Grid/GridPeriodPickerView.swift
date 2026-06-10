@@ -25,7 +25,7 @@ struct GridPeriodPickerView: View {
                     .background {
                         if store.gridPeriod == period {
                             Capsule()
-                                .fill(Color.habitdotCard)
+                                .fill(Color.habitdotElevatedSurface)
                                 .matchedGeometryEffect(id: "gridPeriodSelection", in: periodNamespace)
                                 .habitdotFloatingSurface(Capsule())
                         }

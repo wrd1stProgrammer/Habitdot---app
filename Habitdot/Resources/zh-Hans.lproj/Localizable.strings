@@ -203,6 +203,9 @@
 "onboarding.habit.read" = "阅读";
 "onboarding.habit.exercise" = "运动";
 "onboarding.habit.sleep" = "早睡";
+"onboarding.habit.custom.title" = "自己输入";
+"onboarding.habit.custom.placeholder" = "输入习惯名称";
+"onboarding.habit.custom.helper" = "会将它添加为你的第一个习惯。";
 "onboarding.reminder.title" = "Habitdot 什么时候提醒你？";
 "onboarding.reminder.daily" = "每天一次打卡";
 "onboarding.reminder.dailySubtitle" = "在你选择的时间，温和提醒所有习惯";

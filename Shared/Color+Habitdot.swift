@@ -1,8 +1,15 @@
 import SwiftUI
+import UIKit
 
 extension Color {
-    static let habitdotBackground = Color(.systemGroupedBackground)
-    static let habitdotCard = Color(.secondarySystemGroupedBackground)
+    static let habitdotBackground = dynamic(light: .systemGroupedBackground, dark: UIColor(hex: 0x000000))
+    static let habitdotCard = dynamic(light: .secondarySystemGroupedBackground, dark: UIColor(hex: 0x050505))
+    static let habitdotElevatedSurface = dynamic(light: .secondarySystemGroupedBackground, dark: UIColor(hex: 0x181819))
+    static let habitdotSelectedSurface = dynamic(light: .systemGray5, dark: UIColor(hex: 0x3A3A3A))
+    static let habitdotSubtleStroke = dynamic(light: UIColor(white: 0, alpha: 0.06), dark: UIColor(hex: 0x1D1D1F))
+    static let habitdotControlStroke = dynamic(light: UIColor(white: 1, alpha: 0.62), dark: UIColor(hex: 0x2B2B2D))
+    static let habitdotMutedDot = dynamic(light: .systemGray5, dark: UIColor(hex: 0x151516))
+    static let habitdotCalendarMutedDot = dynamic(light: .systemGray6, dark: UIColor(hex: 0x18181A))
     static let habitdotInk = Color(.label)
     static let habitdotSecondaryText = Color(.secondaryLabel)
     static let habitdotTertiaryText = Color(.tertiaryLabel)
@@ -26,6 +33,23 @@ extension Color {
             red: Double((hex >> 16) & 0xFF) / 255,
             green: Double((hex >> 8) & 0xFF) / 255,
             blue: Double(hex & 0xFF) / 255
+        )
+    }
+
+    private static func dynamic(light: UIColor, dark: UIColor) -> Color {
+        Color(UIColor { traitCollection in
+            traitCollection.userInterfaceStyle == .dark ? dark : light
+        })
+    }
+}
+
+private extension UIColor {
+    convenience init(hex: UInt32) {
+        self.init(
+            red: CGFloat((hex >> 16) & 0xFF) / 255,
+            green: CGFloat((hex >> 8) & 0xFF) / 255,
+            blue: CGFloat(hex & 0xFF) / 255,
+            alpha: 1
         )
     }
 }

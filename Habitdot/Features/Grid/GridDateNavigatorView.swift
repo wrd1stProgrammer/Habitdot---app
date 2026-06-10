@@ -29,7 +29,7 @@ struct GridDateNavigatorView: View {
                 .frame(width: 38, height: 38)
                 .background {
                     Circle()
-                        .fill(Color.habitdotCard)
+                        .fill(Color.habitdotElevatedSurface)
                         .habitdotFloatingSurface(Circle())
                 }
         }

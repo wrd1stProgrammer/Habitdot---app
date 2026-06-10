@@ -2,6 +2,7 @@ import Foundation
 
 struct OnboardingCompletionPayload: Hashable {
     let preferredHabitKey: String?
+    let customHabitTitle: String?
     let preferredAppearanceID: String?
     let commonReminderTime: DateComponents?
     let selections: [String: String]
@@ -15,14 +16,22 @@ struct OnboardingCompletionPayload: Hashable {
 
     static func make(
         selectedOptions: [OnboardingPage: String],
-        commonReminderTime: DateComponents?
+        commonReminderTime: DateComponents?,
+        customHabitTitle: String? = nil
     ) -> OnboardingCompletionPayload {
+        let trimmedCustomHabitTitle = customHabitTitle?
+            .trimmingCharacters(in: .whitespacesAndNewlines)
+        let selectedFirstHabit = selectedOptions[.firstHabit]
+        let usableCustomHabitTitle = selectedFirstHabit == OnboardingHabitSelection.customID && trimmedCustomHabitTitle?.isEmpty == false
+        ? trimmedCustomHabitTitle
+        : nil
         let selections = selectedOptions.reduce(into: [String: String]()) { result, item in
             result[item.key.analyticsKey] = item.value
         }
 
         return OnboardingCompletionPayload(
-            preferredHabitKey: selectedOptions[.firstHabit],
+            preferredHabitKey: selectedFirstHabit,
+            customHabitTitle: usableCustomHabitTitle,
             preferredAppearanceID: selectedOptions[.theme],
             commonReminderTime: commonReminderTime,
             selections: selections,

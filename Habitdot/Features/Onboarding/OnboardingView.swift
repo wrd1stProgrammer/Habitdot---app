@@ -8,6 +8,7 @@ struct OnboardingView: View {
     @State private var commonReminderEnabled = true
     @State private var feedbackTrigger = 0
     @State private var isPaywallPresented = false
+    @State private var customHabitTitle = ""
 
     let onComplete: (OnboardingCompletionPayload) -> Void
 
@@ -70,6 +71,13 @@ struct OnboardingView: View {
                 reminderTime: $commonReminderTime,
                 isEnabled: $commonReminderEnabled
             )
+        case .firstHabit:
+            OnboardingFirstHabitView(
+                selectedID: selections[currentPage],
+                customHabitTitle: $customHabitTitle,
+                selectAction: select,
+                clearCustomSelection: clearCustomFirstHabitSelection
+            )
         default:
             OnboardingQuestionView(
                 page: currentPage,
@@ -84,7 +92,22 @@ struct OnboardingView: View {
     }
 
     private var canContinue: Bool {
-        !currentPage.requiresSelection || selections[currentPage] != nil
+        if currentPage == .firstHabit {
+            return canContinueFirstHabit
+        }
+        return !currentPage.requiresSelection || selections[currentPage] != nil
+    }
+
+    private var canContinueFirstHabit: Bool {
+        guard let selectedID = selections[.firstHabit] else { return false }
+        if selectedID == OnboardingHabitSelection.customID {
+            return !trimmedCustomHabitTitle.isEmpty
+        }
+        return true
+    }
+
+    private var trimmedCustomHabitTitle: String {
+        customHabitTitle.trimmingCharacters(in: .whitespacesAndNewlines)
     }
 
     private var pageTransition: AnyTransition {
@@ -115,8 +138,15 @@ struct OnboardingView: View {
     }
 
     private func select(_ id: String) {
-        feedbackTrigger += 1
+        if selections[currentPage] != id {
+            feedbackTrigger += 1
+        }
         selections[currentPage] = id
+    }
+
+    private func clearCustomFirstHabitSelection() {
+        guard selections[.firstHabit] == OnboardingHabitSelection.customID else { return }
+        selections[.firstHabit] = nil
     }
 
     private func goBack() {
@@ -139,7 +169,8 @@ struct OnboardingView: View {
         onComplete(
             OnboardingCompletionPayload.make(
                 selectedOptions: selections,
-                commonReminderTime: commonReminderComponents
+                commonReminderTime: commonReminderComponents,
+                customHabitTitle: customHabitTitle
             )
         )
     }

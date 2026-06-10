@@ -40,7 +40,7 @@ struct HabitDotMatrixView: View {
     @ViewBuilder
     private func dot(for date: Date) -> some View {
         Circle()
-            .fill(isComplete(date) ? color : Color(.systemGray5))
+            .fill(isComplete(date) ? color : Color.habitdotMutedDot)
             .frame(width: dotSize, height: dotSize)
             .overlay {
                 if calendar.isDateInToday(date) {
@@ -113,7 +113,7 @@ private struct QuarterDotMonthView: View {
                     ForEach(0..<5, id: \.self) { column in
                         if let date = dateForWeekday(weekdayIndex, at: column) {
                             Circle()
-                                .fill(isComplete(date) ? color : Color(.systemGray5))
+                                .fill(isComplete(date) ? color : Color.habitdotMutedDot)
                                 .frame(width: 15, height: 15)
                                 .overlay {
                                     if calendar.isDateInToday(date) {

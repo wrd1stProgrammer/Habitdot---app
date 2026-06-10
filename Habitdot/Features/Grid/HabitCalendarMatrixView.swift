@@ -149,7 +149,7 @@ private struct CalendarDayBubble: View {
                     .font(.system(size: size * 0.48, weight: .medium))
                     .foregroundStyle(isComplete ? .white : Color.habitdotSecondaryText)
                     .frame(width: size, height: size)
-                    .background(isComplete ? color : Color(.systemGray6), in: Circle())
+                    .background(isComplete ? color : Color.habitdotCalendarMutedDot, in: Circle())
                     .overlay {
                         if calendar.isDateInToday(date) {
                             Circle()

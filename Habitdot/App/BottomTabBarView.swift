@@ -2,11 +2,14 @@ import SwiftUI
 
 struct BottomTabBarView: View {
     @Environment(HabitStore.self) private var store
+    @Environment(\.colorScheme) private var colorScheme
     @Namespace private var glassNamespace
     let action: (HabitdotTab) -> Void
 
     var body: some View {
-        if #available(iOS 26.0, *) {
+        if colorScheme == .dark {
+            darkBody
+        } else if #available(iOS 26.0, *) {
             glassBody
         } else {
             fallbackBody
@@ -38,6 +41,28 @@ struct BottomTabBarView: View {
                 .stroke(.white.opacity(0.68), lineWidth: 1)
         }
         .shadow(color: .black.opacity(0.12), radius: 24, y: 12)
+        .frame(width: barWidth, height: barHeight)
+        .animation(.snappy(duration: 0.32, extraBounce: 0.12), value: store.selectedTab)
+    }
+
+    private var darkBody: some View {
+        ZStack(alignment: .leading) {
+            Capsule()
+                .fill(Color.habitdotElevatedSurface)
+                .frame(width: barWidth, height: barHeight)
+
+            selectedDarkBubble
+                .allowsHitTesting(false)
+
+            tabButtons
+                .padding(barPadding)
+                .zIndex(1)
+        }
+        .overlay {
+            Capsule()
+                .stroke(Color.habitdotControlStroke, lineWidth: 1)
+        }
+        .shadow(color: .black.opacity(0.34), radius: 24, y: 12)
         .frame(width: barWidth, height: barHeight)
         .animation(.snappy(duration: 0.32, extraBounce: 0.12), value: store.selectedTab)
     }
@@ -90,6 +115,13 @@ struct BottomTabBarView: View {
             .glassEffect(.regular.tint(.white.opacity(0.20)).interactive(), in: Capsule())
             .glassEffectID("bottom-tab-selection", in: glassNamespace)
             .glassEffectTransition(.matchedGeometry)
+    }
+
+    private var selectedDarkBubble: some View {
+        Capsule()
+            .fill(Color.habitdotSelectedSurface)
+            .frame(width: itemWidth, height: bubbleHeight)
+            .offset(x: barPadding + CGFloat(selectedIndex) * (itemWidth + itemSpacing))
     }
 
     private var selectedFallbackBubble: some View {

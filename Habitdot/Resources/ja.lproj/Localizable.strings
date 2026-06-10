@@ -203,6 +203,9 @@
 "onboarding.habit.read" = "読書";
 "onboarding.habit.exercise" = "運動";
 "onboarding.habit.sleep" = "早く寝る";
+"onboarding.habit.custom.title" = "自分で入力";
+"onboarding.habit.custom.placeholder" = "習慣名を入力";
+"onboarding.habit.custom.helper" = "最初の習慣として追加します。";
 "onboarding.reminder.title" = "Habitdotからいつ通知しますか？";
 "onboarding.reminder.daily" = "1日1回のチェック";
 "onboarding.reminder.dailySubtitle" = "選んだ時間に、すべての習慣をやさしく知らせます";

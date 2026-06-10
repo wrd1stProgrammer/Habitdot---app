@@ -76,8 +76,11 @@ final class HabitStore {
 
         if
             let preferredHabitKey,
-            preferredHabitKey != "later",
-            let habit = seedHabit(for: preferredHabitKey, order: nextDisplayOrder()),
+            let habit = onboardingHabit(
+                for: preferredHabitKey,
+                customTitle: payload.customHabitTitle,
+                order: nextDisplayOrder()
+            ),
             !snapshot.habits.contains(where: { !$0.isArchived && $0.title == habit.title })
         {
             snapshot.habits.append(habit)
@@ -405,6 +408,27 @@ final class HabitStore {
         default:
             nil
         }
+    }
+
+    private func onboardingHabit(for key: String, customTitle: String?, order: Int) -> Habit? {
+        if key == OnboardingHabitSelection.customID {
+            guard
+                let title = customTitle?.trimmingCharacters(in: .whitespacesAndNewlines),
+                !title.isEmpty
+            else {
+                return nil
+            }
+
+            return Habit(
+                title: title,
+                symbolName: "checkmark",
+                colorToken: .indigo,
+                frequency: .everyday,
+                displayOrder: order
+            )
+        }
+
+        return seedHabit(for: key, order: order)
     }
 
     private func updateHabit(_ habit: Habit, shouldPersist: Bool = true, mutation: (inout Habit) -> Void) {

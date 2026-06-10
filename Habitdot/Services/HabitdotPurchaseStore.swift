@@ -24,7 +24,10 @@ final class HabitdotPurchaseStore {
         guard !Purchases.isConfigured else { return true }
 
         Purchases.logLevel = .warn
-        Purchases.configure(withAPIKey: RevenueCatConfig.publicAPIKey)
+        let configuration = Configuration.Builder(withAPIKey: RevenueCatConfig.publicAPIKey)
+            .with(storeKitVersion: .storeKit1)
+            .build()
+        Purchases.configure(with: configuration)
         return true
     }
 

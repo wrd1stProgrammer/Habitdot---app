@@ -191,6 +191,9 @@
 "onboarding.habit.read" = "Read";
 "onboarding.habit.exercise" = "Exercise";
 "onboarding.habit.sleep" = "Sleep early";
+"onboarding.habit.custom.title" = "Create your own";
+"onboarding.habit.custom.placeholder" = "Type a habit";
+"onboarding.habit.custom.helper" = "We'll add it as your first habit.";
 "onboarding.reminder.title" = "When should Habitdot remind you?";
 "onboarding.reminder.daily" = "One daily check-in";
 "onboarding.reminder.dailySubtitle" = "A gentle reminder for all habits at your chosen time";

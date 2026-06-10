@@ -191,6 +191,9 @@
 "onboarding.habit.read" = "독서";
 "onboarding.habit.exercise" = "운동";
 "onboarding.habit.sleep" = "일찍 자기";
+"onboarding.habit.custom.title" = "직접 입력";
+"onboarding.habit.custom.placeholder" = "습관 이름 입력";
+"onboarding.habit.custom.helper" = "첫 습관으로 바로 추가돼요.";
 "onboarding.reminder.title" = "언제 알려드릴까요?";
 "onboarding.reminder.daily" = "매일 한 번 체크 알림";
 "onboarding.reminder.dailySubtitle" = "선택한 시간에 전체 습관을 가볍게 알려드려요";

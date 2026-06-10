@@ -15,7 +15,7 @@ struct GridTopBarView: View {
                 .background {
                     if store.gridDisplayMode == .dots {
                         Circle()
-                            .fill(Color.habitdotCard)
+                            .fill(Color.habitdotElevatedSurface)
                             .habitdotFloatingSurface(Circle())
                     }
                 }
@@ -28,7 +28,7 @@ struct GridTopBarView: View {
                 .background {
                     if store.gridDisplayMode == .calendar {
                         Circle()
-                            .fill(Color.habitdotCard)
+                            .fill(Color.habitdotElevatedSurface)
                             .habitdotFloatingSurface(Circle())
                     }
                 }

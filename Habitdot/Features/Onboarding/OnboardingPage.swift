@@ -85,7 +85,6 @@ enum OnboardingPage: Int, CaseIterable, Identifiable {
             []
         case .firstHabit:
             [
-                OnboardingOption(id: "later", symbolName: "plus", titleKey: "onboarding.habit.later"),
                 OnboardingOption(id: "onboarding.habit.walk", symbolName: "figure.walk", titleKey: "onboarding.habit.walk"),
                 OnboardingOption(id: "onboarding.habit.water", symbolName: "drop", titleKey: "onboarding.habit.water"),
                 OnboardingOption(id: "onboarding.habit.read", symbolName: "book", titleKey: "onboarding.habit.read"),

@@ -191,6 +191,9 @@
 "onboarding.habit.read" = "อ่านหนังสือ";
 "onboarding.habit.exercise" = "ออกกำลังกาย";
 "onboarding.habit.sleep" = "เข้านอนเร็ว";
+"onboarding.habit.custom.title" = "พิมพ์เอง";
+"onboarding.habit.custom.placeholder" = "พิมพ์ชื่อนิสัย";
+"onboarding.habit.custom.helper" = "เราจะเพิ่มเป็นนิสัยแรกของคุณ";
 "onboarding.reminder.title" = "อยากให้ Habitdot เตือนคุณเมื่อไหร่?";
 "onboarding.reminder.daily" = "เช็กอินวันละครั้ง";
 "onboarding.reminder.dailySubtitle" = "การเตือนเบาๆ สำหรับทุกนิสัยในเวลาที่คุณเลือก";

@@ -203,6 +203,9 @@
 "onboarding.habit.read" = "Lesen";
 "onboarding.habit.exercise" = "Training";
 "onboarding.habit.sleep" = "Früh schlafen";
+"onboarding.habit.custom.title" = "Eigene Gewohnheit";
+"onboarding.habit.custom.placeholder" = "Gewohnheit eingeben";
+"onboarding.habit.custom.helper" = "Wir fügen sie als deine erste Gewohnheit hinzu.";
 "onboarding.reminder.title" = "Wann soll Habitdot dich erinnern?";
 "onboarding.reminder.daily" = "Ein täglicher Check-in";
 "onboarding.reminder.dailySubtitle" = "Eine sanfte Erinnerung für alle Gewohnheiten zur gewählten Uhrzeit";

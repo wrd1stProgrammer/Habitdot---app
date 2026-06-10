@@ -6,6 +6,7 @@ struct PaywallView: View {
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
     @State private var selectedPlan = HabitdotProPlan.defaultPlan
     @State private var didAppear = false
+    @State private var didRecordPaywallView = false
     @State private var isErrorPresented = false
     @State private var errorMessage = ""
 
@@ -82,6 +83,7 @@ struct PaywallView: View {
         }
         .preferredColorScheme(.dark)
         .onAppear {
+            recordPaywallView()
             guard !reduceMotion else {
                 didAppear = true
                 return
@@ -246,6 +248,15 @@ struct PaywallView: View {
             } catch {
                 present(error)
             }
+        }
+    }
+
+    private func recordPaywallView() {
+        guard !didRecordPaywallView else { return }
+        didRecordPaywallView = true
+
+        Task(priority: .utility) {
+            try? await HabitdotPaywallEventService().recordView()
         }
     }
 
